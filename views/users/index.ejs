@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate.ejs') %>
+    <h1 class="text-center">All Users</h1>
+    <% for(let user of users){ %>
+        <div class="card damn mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" alt="" src="<%=user.image[0].url%>">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= user.name %>
+                        </h5>
+                        <p class="card-text">Branch:
+                            <%=user.branch %>
+                        </p>
+                        <p class="car-text">Current Semester:
+                            <%= user.semester %>
+                        </p>
+                        <a class="btn btn-info" href="/Users/<%=user.id%>">View <%=user.name%></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>

@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate.ejs') %>
+    <h1 class="text-center">All Faculties</h1>
+    <% for(let Faculty of faculties){ %>
+        <div class="card damn mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" alt="" src="<%=Faculty.image[0].url%>">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= Faculty.name %>
+                        </h5>
+                        <p class="card-text">Department: <strong><%=Faculty.department %></strong></p>
+                        <p class="card-text">Qualifications:
+                            <%= Faculty.qualifications %>
+                        </p>
+                        <a class="btn btn-info" href="/Faculty/<%=Faculty.id%>">View <%=Faculty.name%></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>

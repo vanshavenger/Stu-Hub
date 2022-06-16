@@ -1,0 +1,58 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div id="usercarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <% faculty.image.forEach((img,i)=>{ %>
+                    <div class="carousel-item <%= i === 0?'active' :'' %>">
+                      <img src="<%= img.url %>" class="d-block card-img-y w-100 card-img-top" alt="..." />
+                    </div>
+                    <% }) %>
+                </div>
+                <% if(faculty.image.length> 1) {%>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#usercarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#usercarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+        
+                  <% } %>
+              </div>
+            <div class="card notdamn mb-3">
+                
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= faculty.name %>
+                    </h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Designation:</strong>
+                        <%= faculty.designation %>
+                    </li>
+                    <li class="list-group-item"><strong>Department:</strong>
+                        <%= faculty.department %>
+                    </li>
+                    <li class="list-group-item"><strong>Years of experience:</strong>
+                        <%= faculty.experience %>
+                    </li>
+                    <li class="list-group-item"><strong>Qualifications:</strong>
+                        <%= faculty.qualifications %>
+                    </li>
+                </ul>
+
+                <div class="card-footer text-muted">
+                    <a class="btn btn-info btn-border-radius-lg" href="/Faculty">All Faculties</a>
+                </div>
+                <% if(currentUser && faculty.author.equals(currentUser._id)){ %>
+                    <div class="card-body">
+                        <a href="/Faculty/<%= faculty.id %>/edit" class="btn btn-warning card-link">Edit</a>
+                        <form class="d-inline" action="/Faculty/<%= faculty._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                    <% } %>
+            </div>

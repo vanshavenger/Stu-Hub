@@ -1,0 +1,95 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+<div class="row">
+    <h1 class="text-center">
+        Edit Faculty
+    </h1>
+    <div class="col-6 offset-3">
+        <form action="/Faculty/<%= faculty.id %>?_method=PUT" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+            <div class="mb-3">
+              <label for="name" class="form-label"><strong>Name</strong></label>
+              <input class="form-control" type="text" id="name" name="faculty[name]" placeholder="ABC XYZ" value="<%= faculty.name %>" required/>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please provide a Name.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="designation" class="form-label"><strong>Designation</strong></label>
+              <input class="form-control" type="text" id="designation" name="faculty[designation]" required value="<%= faculty.designation %>" />
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please provide a Rollno.
+              </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label" for="qualifications" class="form-label"><strong>Qualifications</strong></label>
+                <input class="form-control" type="text" id="qualifications" name="faculty[qualifications]" value="<%= faculty.qualifications %>"  required />
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div class="invalid-feedback">
+                    Please provide your branch.
+                  </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="departments"><strong>Department</strong></label>
+                <select class="form-select" id="departments" aria-label="clubs" name="faculty[department]"required>
+                    <% for(let department of departments){ %>
+                        <option value="<%=department%>" <%= faculty.department === department ? 'selected': '' %> ><%=department%></option>
+                        <% } %>
+                  </select>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div class="invalid-feedback">
+                    Please select a club.
+                  </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="experience" class="form-label"><strong>Experience</strong></label>
+                <input class="form-control" type="number" id="experience" name="faculty[experience]" value="<%= faculty.experience %>"  required/>
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div class="invalid-feedback">
+                    Please provide a valid state.
+                  </div>
+            </div>
+            <div class="mb-3">
+              <label for="image" class="form-label"><strong>Add Images</strong></label>
+              <div class="form-file custom-file">
+                  <label for="image" class="form-label custom-file-label"></label>
+                  <input class="form-control" type="file" id="image" name="image" multiple>
+                </div>
+          </div>
+          <h6>Delete Images</h6>
+                <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
+                  <% faculty.image.forEach((img, i) => { %>
+                  <div class="col">
+                    <div class="card">
+                      <img class="card-img" src="<%= img.url %>" alt="">
+                      <div class="card-img-overlay text-end pt-1 pe-2">
+                        <label class="visually-hidden" for="image-<%= i %>">Delete Image</label>
+                        <input class="form-check-input" type="checkbox" name="deleteImages[]" value="<%= img.filename %>"  id="image-<%= i %>">
+                      </div> 
+                    </div> 
+                </div> 
+                      <% }) %>
+                    </div> 
+          
+            <div class="mb-3">
+                <button class="btn btn-success">Update Faculty</button>
+            </div>
+          </form>
+          <a class="btn btn-warning mb-3" href="/Faculty">All Faculties</a>
+    </div>
+</div>
+
+
